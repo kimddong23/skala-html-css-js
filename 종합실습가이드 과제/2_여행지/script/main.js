@@ -166,10 +166,10 @@ document.addEventListener('DOMContentLoaded', function () {
          - rel=0: 관련 영상 표시 최소화
     ───────────────────────────────────────────────────── */
     var YT_VIDEOS = [
-        { id: 'f4_DuRm1T5A', title: '제주도 여행 — 성산일출봉과 동부 해안' },
-        { id: 'hT_nvWreIhg', title: '한라산 등반 — 영실 탐방로의 사계절' },
-        { id: 'yWivgGfuBSE', title: '제주 협재해변 — 에메랄드 빛 바다' },
-        { id: '9M1PdPXMSmo', title: '제주 전경 드론 — 섬 전체를 한눈에' }
+        { id: 'hSPcExVhquE', title: '제주도의 푸른 밤 — 밴드 고맙삼다' },
+        { id: 'pT96hVA5YF8', title: '초호화 제주 여행은 돈값 할까?' },
+        { id: 'F7PN-1EmJbI', title: '제주 찐로컬 맛집 — 또간집 EP.27' },
+        { id: 'Dv2XQDs7k3k', title: '두 남자의 초호화 크루즈 여행기 — 제주' }
     ];
     var INTERVAL_MS = 15000;   /* 15초마다 다음 영상으로 전환 */
     var TICK_MS     = 250;     /* 진행 바 업데이트 주기 */
