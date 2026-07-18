@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>나의 수업 시간표</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+    <h1><i class="bi bi-calendar-week"></i> 나의 수업 시간표</h1>
+    <p>SKALA 4기 풀스택 부트캠프 주간 커리큘럼. 월~금 풀가동, 주말은 복습(=밀린 잠 처리).</p>
+    <hr>
+
+    <!-- 표 실습. 테두리 등 스타일은 HTML 속성 대신 css로 처리.
+         rowspan/colspan으로 칸을 합칠 때는 합쳐진 자리의 칸을 비워야 함 -->
+    <table>
+        <thead>
+            <tr>
+                <th>시간</th>
+                <th>월</th>
+                <th>화</th>
+                <th>수</th>
+                <th>목</th>
+                <th>금</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>09:00 ~ 10:00</td>
+                <td>HTML</td>
+                <td>HTML</td>
+                <td>CSS</td>
+                <td>CSS</td>
+                <td>JavaScript</td>
+            </tr>
+            <tr>
+                <td>10:00 ~ 12:00</td>
+                <td colspan="2">HTML 실습 (2시간)</td>   <!-- colspan=2 : 월,화 두 칸 가로로 합치기 -->
+                <td colspan="2">CSS 실습 (2시간)</td>
+                <td>JavaScript</td>
+            </tr>
+            <tr>
+                <td>12:00 ~ 13:00</td>
+                <td colspan="5">점심시간</td>   <!-- 요일 5칸 가로로 합침 -->
+            </tr>
+            <tr>
+                <td>13:00 ~ 14:00</td>
+                <td>HTML</td>
+                <td>HTML</td>
+                <td>CSS</td>
+                <td>CSS</td>
+                <td>JavaScript</td>
+            </tr>
+            <tr>
+                <td>14:00 ~ 16:00</td>
+                <td colspan="2">HTML 실습 (2시간)</td>
+                <td colspan="2">CSS 실습 (2시간)</td>
+                <td>JavaScript</td>
+            </tr>
+            <tr>
+                <td>16:00 ~ 17:00</td>
+                <td rowspan="2">HTML 실습 (2시간)</td>   <!-- rowspan=2 : 아래 행까지 세로로 합치기 -->
+                <td>HTML</td>
+                <td rowspan="2">CSS 실습 (2시간)</td>
+                <td>CSS</td>
+                <td>JavaScript</td>
+            </tr>
+            <tr>
+                <td>17:00 ~ 18:00</td>
+                <!-- 월/수 칸은 위 행의 rowspan이 이미 차지하고 있어 여기서는 생략 -->
+                <td>HTML</td>
+                <td>CSS</td>
+                <td>JavaScript</td>
+            </tr>
+        </tbody>
+    </table>
+    </div>
+</body>
+</html>

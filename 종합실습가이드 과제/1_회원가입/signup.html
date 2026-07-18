@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="juyong.dev 회원가입 페이지">
+    <meta name="author" content="신주용">
+    <title>juyong.dev | 회원가입</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- 고정 헤더: CSS position:fixed + z-index 로 스크롤 시 상단에 고정 -->
+    <header class="site-header">
+        <a href="signup.html" class="logo">juyong<span class="dot">.dev</span></a>
+        <nav>
+            <a href="signup.html">회원가입</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <h1>회원가입</h1>
+        <p class="subtitle">juyong.dev 커뮤니티 회원 정보를 입력해 주세요.</p>
+
+        <!-- 전체 입력을 하나의 form으로 묶음.
+             method="get" 이므로 제출 시 입력값이 쿼리스트링으로 result.html에 전달됨. -->
+        <form action="result.html" method="get">
+
+            <fieldset>
+                <legend>계정 정보</legend>
+
+                <div class="field">
+                    <label for="userId">아이디 <span class="hint">(영문/숫자 4~15자, 필수)</span></label>
+                    <!-- pattern: 영문·숫자 4~15자만 허용. required와 함께 브라우저가 제출을 차단 -->
+                    <input type="text" id="userId" name="userId" required
+                           pattern="[A-Za-z0-9]{4,15}"
+                           title="영문/숫자 4~15자로 입력하세요"
+                           placeholder="예: juyongdev">
+                </div>
+
+                <div class="field">
+                    <label for="userPw">비밀번호 <span class="hint">(8자 이상, 필수)</span></label>
+                    <!-- minlength: 8자 미만이면 제출이 차단됨 -->
+                    <input type="password" id="userPw" name="userPw" required
+                           minlength="8" maxlength="20" placeholder="8자 이상 입력">
+                </div>
+
+                <div class="field">
+                    <label for="email">이메일 <span class="hint">(필수)</span></label>
+                    <!-- type=email: 형식에 맞지 않으면 브라우저가 검증 -->
+                    <input type="email" id="email" name="email" required
+                           placeholder="you@example.com">
+                </div>
+
+                <div class="field">
+                    <label for="phone">전화번호 <span class="hint">(010-0000-0000 형식)</span></label>
+                    <!-- type=tel + pattern 으로 전화번호 형식 검증 -->
+                    <input type="tel" id="phone" name="phone"
+                           pattern="01[0-9]-[0-9]{3,4}-[0-9]{4}"
+                           title="010-1234-5678 형식으로 입력하세요"
+                           placeholder="010-1234-5678">
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>프로필 정보</legend>
+
+                <div class="field">
+                    <label for="birth">생년월일</label>
+                    <!-- type=date: min/max 로 선택 가능한 날짜 범위 제한 -->
+                    <input type="date" id="birth" name="birth" min="1950-01-01" max="2015-12-31">
+                </div>
+
+                <div class="field">
+                    <label>경력 수준</label>
+                    <!-- radio: 같은 name 그룹에서 하나만 선택됨 -->
+                    <div class="choice-group">
+                        <label class="choice"><input type="radio" name="level" value="입문" checked> 입문</label>
+                        <label class="choice"><input type="radio" name="level" value="주니어"> 주니어</label>
+                        <label class="choice"><input type="radio" name="level" value="시니어"> 시니어</label>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label>관심 분야 <span class="hint">(복수 선택 가능)</span></label>
+                    <!-- checkbox: 같은 name 으로 체크한 값이 모두 전송됨(복수 값) -->
+                    <div class="choice-group">
+                        <label class="choice"><input type="checkbox" name="interest" value="프론트엔드"> 프론트엔드</label>
+                        <label class="choice"><input type="checkbox" name="interest" value="백엔드"> 백엔드</label>
+                        <label class="choice"><input type="checkbox" name="interest" value="모바일"> 모바일</label>
+                        <label class="choice"><input type="checkbox" name="interest" value="AI/ML"> AI/ML</label>
+                        <label class="choice"><input type="checkbox" name="interest" value="데이터"> 데이터</label>
+                        <label class="choice"><input type="checkbox" name="interest" value="DevOps"> DevOps</label>
+                        <label class="choice"><input type="checkbox" name="interest" value="클라우드"> 클라우드</label>
+                        <label class="choice"><input type="checkbox" name="interest" value="보안"> 보안</label>
+                        <label class="choice"><input type="checkbox" name="interest" value="게임"> 게임</label>
+                        <label class="choice"><input type="checkbox" name="interest" value="UI/UX"> UI/UX</label>
+                        <label class="choice"><input type="checkbox" name="interest" value="블록체인"> 블록체인</label>
+                        <label class="choice"><input type="checkbox" name="interest" value="임베디드"> 임베디드</label>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label for="path">가입 경로</label>
+                    <!-- select: 드롭다운에서 하나 선택 -->
+                    <select id="path" name="path">
+                        <option value="검색">인터넷 검색</option>
+                        <option value="지인추천">지인 추천</option>
+                        <option value="SNS">SNS</option>
+                        <option value="기타">기타</option>
+                    </select>
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>자기소개</legend>
+                <div class="field">
+                    <label for="intro">한 줄 소개</label>
+                    <!-- textarea: 여러 줄 입력 -->
+                    <textarea id="intro" name="intro" placeholder="간단한 자기소개를 입력해 주세요"></textarea>
+                </div>
+                <div class="field">
+                    <label class="choice">
+                        <input type="checkbox" name="newsletter" value="구독"> 뉴스레터 구독에 동의합니다
+                    </label>
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>커뮤니티 이용 약관</legend>
+                <!-- [추가과제] 커뮤니티 가이드라인 필수 동의 (required 체크박스로 미동의 시 가입 차단) -->
+                <div class="field">
+                    <label class="choice">
+                        <input type="checkbox" name="agree" value="동의" required>
+                        커뮤니티 가이드라인에 동의합니다. 욕설·비방·분탕 등 이용 규칙 위반 시 활동이 제한될 수 있습니다. <span class="hint">(필수)</span>
+                    </label>
+                </div>
+            </fieldset>
+
+            <!-- 특이도: 공통 .btn 위에 .btn-primary 를 함께 적용해 색상만 덧입힘 -->
+            <div class="actions">
+                <button type="submit" class="btn btn-primary">가입하기</button>
+                <button type="reset" class="btn">다시 작성</button>
+            </div>
+        </form>
+    </div>
+
+    <footer>&copy; 2026 juyong.dev · 신주용</footer>
+</body>
+</html>

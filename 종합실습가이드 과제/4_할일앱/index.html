@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="juyong.dev 인터랙티브 할 일 관리 앱">
+    <meta name="author" content="신주용">
+    <title>juyong.dev | 할 일 관리</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- 상단바: 로고(왼쪽) / 오늘의 한마디(오른쪽) 배치 -->
+    <header class="site-header">
+        <a href="index.html" class="logo">juyong<span class="dot">.dev</span> Todo</a>
+
+        <!-- 오늘의 한마디: async/await + fetch 로 채움. 실패하면 기본 문구로 대체됨 -->
+        <p id="quote" class="quote" aria-live="polite">오늘의 한마디를 불러오는 중…</p>
+    </header>
+
+    <main class="container">
+        <!-- 히어로: 제목과 안내 문구 -->
+        <section class="hero">
+            <p class="hero-eyebrow">TASK MANAGER</p>
+            <h1 class="hero-title">오늘 할 일을 담백하게 정리</h1>
+            <p class="hero-desc">추가하고, 완료를 체크하고, 필요 없어지면 지웁니다. 목록은 이 브라우저에 저장됩니다.</p>
+        </section>
+
+        <!-- 입력 영역: form 으로 감싸 Enter 키 제출과 추가 버튼 클릭을 한 번에 처리 -->
+        <!-- [추가과제] 마감일 날짜 선택, 우선순위 선택을 같은 form 안에 배치 -->
+        <form id="todo-form" class="todo-form" autocomplete="off">
+            <div class="todo-form-main">
+                <input
+                    id="todo-input"
+                    class="todo-input"
+                    type="text"
+                    placeholder="할 일을 입력하고 Enter 를 누르세요"
+                    aria-label="할 일 입력"
+                    maxlength="120"
+                >
+                <button type="submit" class="add-btn">추가</button>
+            </div>
+            <div class="todo-form-options">
+                <!-- [추가과제] 마감일: date 입력. 값이 없으면 마감일 없음으로 처리 -->
+                <label class="form-option-label" for="todo-due">
+                    마감일
+                    <input
+                        id="todo-due"
+                        class="todo-due-input"
+                        type="date"
+                        aria-label="마감일 선택"
+                    >
+                </label>
+                <!-- [추가과제] 우선순위: select 로 높음/보통/낮음 선택. 기본값 보통 -->
+                <label class="form-option-label" for="todo-priority">
+                    우선순위
+                    <select id="todo-priority" class="todo-priority-select" aria-label="우선순위 선택">
+                        <option value="high">높음</option>
+                        <option value="medium" selected>보통</option>
+                        <option value="low">낮음</option>
+                    </select>
+                </label>
+            </div>
+        </form>
+
+        <!-- [추가과제] 진행률 바: 완료 비율을 시각적으로 표시. 항목 변화 시 실시간 갱신 -->
+        <div class="progress-wrap" aria-label="완료 진행률">
+            <div class="progress-bar-bg">
+                <div id="progress-bar" class="progress-bar-fill" style="width: 0%"></div>
+            </div>
+            <span id="progress-label" class="progress-label">0%</span>
+        </div>
+
+        <!-- 필터 버튼: 전체 / 진행중 / 완료. 클릭 시 data-filter 값으로 상태를 바꿈 -->
+        <div id="filters" class="filters" role="group" aria-label="할 일 필터">
+            <button type="button" class="filter-btn is-active" data-filter="all">전체</button>
+            <button type="button" class="filter-btn" data-filter="active">진행중</button>
+            <button type="button" class="filter-btn" data-filter="done">완료</button>
+        </div>
+
+        <!-- 할 일 목록: 부모 ul 에 리스너를 1회만 걸고 closest() 로 항목을 처리 (이벤트 위임) -->
+        <ul id="todo-list" class="todo-list" aria-label="할 일 목록"></ul>
+
+        <!-- 목록이 비었을 때 안내 문구 -->
+        <p id="empty-state" class="empty-state" hidden>표시할 할 일이 없습니다.</p>
+
+        <!-- 요약: 전체 개수와 완료 개수 -->
+        <footer class="summary">
+            <span id="summary-text">전체 0개 · 완료 0개</span>
+        </footer>
+    </main>
+
+    <!-- 모듈로 로드: storage.js(데이터) 를 app.js(화면) 가 import 함 -->
+    <script type="module" src="script/app.js"></script>
+</body>
+</html>

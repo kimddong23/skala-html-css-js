@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="juyong.dev 회원가입 결과 페이지">
+    <meta name="author" content="신주용">
+    <title>juyong.dev | 가입 완료</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- 회원가입 페이지와 동일한 고정 헤더(position:fixed) -->
+    <header class="site-header">
+        <a href="signup.html" class="logo">juyong<span class="dot">.dev</span></a>
+        <nav>
+            <a href="signup.html">다시 가입</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <h1>회원가입 완료</h1>
+        <p class="subtitle">아래는 입력하신 정보입니다.</p>
+
+        <h2>입력 정보</h2>
+        <!-- 표 내용은 result.js 가 쿼리스트링 값을 읽어 동적으로 생성 -->
+        <table class="result-table">
+            <tbody id="result-body"></tbody>
+        </table>
+
+        <div class="notice">
+            <p>입력하신 이메일로 인증 메일이 발송되었습니다. (실습용 예시)</p>
+        </div>
+    </div>
+
+    <footer>&copy; 2026 juyong.dev · 신주용</footer>
+
+    <!-- 쿼리스트링(?userId=...)을 읽어 표로 렌더링 -->
+    <script src="script/result.js"></script>
+</body>
+</html>

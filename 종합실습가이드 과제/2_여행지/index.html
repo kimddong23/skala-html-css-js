@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="제주도 여행지 소개 - 명소, 먹거리, 영상으로 만나는 자연의 섬 가이드">
+    <meta name="author" content="신주용">
+    <title>juyong.dev | 제주 여행 가이드</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<!-- id=top: 푸터의 '맨 위로' 링크가 이 최상단으로 이동함 -->
+<body id="top">
+
+    <!-- 상단 고정 헤더: CSS position:fixed 로 스크롤 시 상단 고정.
+         nav 링크는 각 section의 id로 연결되는 앵커. -->
+    <header class="site-header">
+        <a href="#top" class="logo">juyong<span class="dot">.dev</span></a>
+        <nav class="site-nav" aria-label="페이지 내 이동">
+            <a href="#intro"  data-section="intro">소개</a>
+            <a href="#spots"  data-section="spots">명소</a>
+            <a href="#food"   data-section="food">먹거리</a>
+            <a href="#video"  data-section="video" class="optional">영상</a>
+        </nav>
+    </header>
+
+    <!-- [추가과제] 라이트박스 오버레이 — .lightbox 자체가 배경 클릭 영역.
+         figure 클릭은 stopPropagation으로 막아 내부 클릭이 닫힘을 유발하지 않게 함.
+         ESC 키 / 닫기 버튼 / 배경 클릭으로 닫힘. -->
+    <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="이미지 확대 보기" hidden>
+        <button class="lightbox-close" id="lbClose" aria-label="닫기">&times;</button>
+        <figure class="lightbox-figure" id="lbFigure">
+            <img src="" alt="" id="lbImg">
+            <figcaption id="lbCaption"></figcaption>
+        </figure>
+    </div>
+
+    <!-- 페이지 본문은 하나의 main 으로 감쌈 (페이지당 main 1개) -->
+    <main>
+
+        <!-- 히어로: gradient 오버레이 + 협재 해변 이미지를 background로 겹침 -->
+        <section class="hero" id="intro">
+            <p class="eyebrow">Jeju Travel Guide</p>
+            <h1>바람과 돌과 여자의 섬, 제주</h1>
+            <p>화산이 빚어낸 웅장한 한라산, 에메랄드 빛 협재해변, 그리고 일출의 성지
+               성산일출봉까지. 자연이 그대로 남아있는 제주의 장면을 소개합니다.</p>
+            <a href="#spots" class="cta">명소 둘러보기</a>
+        </section>
+
+        <!-- [추가과제] 가보고 싶은 명소 체크리스트 — 각 카드에 '가고 싶어요' 버튼.
+             localStorage에 저장/복원하며 위의 카운트 표시로 현황 확인 가능. -->
+        <section class="section" id="spots">
+            <div class="section-head">
+                <span class="label">SPOTS</span>
+                <h2>꼭 가봐야 할 명소</h2>
+                <p>화산지형, 해변, 동굴, 폭포까지 — 제주의 대표 자연유산을 모았습니다.</p>
+            </div>
+
+            <!-- [추가과제] 가고 싶은 명소 카운트 표시 영역 -->
+            <div class="wishlist-bar">
+                <span id="wishCount">가고 싶은 곳 <strong>0</strong>곳</span>
+            </div>
+
+            <!-- 명소 갤러리: figure + figcaption 6개.
+                 [추가과제] 이미지 영역(.lb-trigger) 클릭 시 라이트박스 열림. -->
+            <div class="gallery">
+
+                <!-- 1. 성산일출봉 -->
+                <figure data-spot="seongsan">
+                    <span class="thumb lb-trigger"
+                          data-src="media/seongsan.jpg"
+                          data-alt="성산일출봉 분화구 정상에서 바라본 제주 동부 해안 전경"
+                          data-caption="성산일출봉 — 화산 분화구가 꽃처럼 펼쳐지는 제주 동부의 상징">
+                        <img src="media/seongsan.jpg"
+                             alt="성산일출봉 분화구 정상에서 바라본 제주 동부 해안 전경">
+                    </span>
+                    <figcaption>
+                        <h3>성산일출봉</h3>
+                        <p>약 5,000년 전 바닷속 화산 분출로 형성된 분화구입니다.
+                           정상에 오르면 탁 트인 동부 해안과 우도가 한눈에 들어옵니다.</p>
+                        <span class="tag">세계자연유산</span>
+                        <!-- [추가과제] 가고 싶어요 버튼 -->
+                        <button class="wish-btn" data-id="seongsan" aria-pressed="false">가고 싶어요</button>
+                    </figcaption>
+                </figure>
+
+                <!-- 2. 한라산 -->
+                <figure data-spot="hallasan">
+                    <span class="thumb lb-trigger"
+                          data-src="media/hallasan.jpg"
+                          data-alt="한라산 영실 탐방로의 나무 계단과 고산지대 초목"
+                          data-caption="한라산 — 영실 탐방로의 단풍과 구름 위 풍경">
+                        <img src="media/hallasan.jpg"
+                             alt="한라산 영실 탐방로의 나무 계단과 고산지대 초목">
+                    </span>
+                    <figcaption>
+                        <h3>한라산</h3>
+                        <p>해발 1,950m, 남한에서 가장 높은 산입니다.
+                           영실·어리목 탐방로는 계절마다 다른 풍경을 선사합니다.</p>
+                        <span class="tag">국립공원</span>
+                        <button class="wish-btn" data-id="hallasan" aria-pressed="false">가고 싶어요</button>
+                    </figcaption>
+                </figure>
+
+                <!-- 3. 협재해변 -->
+                <figure data-spot="hyeopjae">
+                    <span class="thumb lb-trigger"
+                          data-src="media/hyeopjae.jpg"
+                          data-alt="에메랄드빛 바다와 흰 모래사장이 펼쳐진 협재해변"
+                          data-caption="협재해변 — 맑은 날이면 비양도가 그림처럼 보입니다">
+                        <img src="media/hyeopjae.jpg"
+                             alt="에메랄드빛 바다와 흰 모래사장이 펼쳐진 협재해변">
+                    </span>
+                    <figcaption>
+                        <h3>협재해변</h3>
+                        <p>제주 서쪽의 협재해변은 얕고 투명한 에메랄드 빛 바다로 유명합니다.
+                           맑은 날 비양도가 배경처럼 떠오르는 풍경이 인상적입니다.</p>
+                        <span class="tag">해수욕장</span>
+                        <button class="wish-btn" data-id="hyeopjae" aria-pressed="false">가고 싶어요</button>
+                    </figcaption>
+                </figure>
+
+                <!-- 4. 만장굴 -->
+                <figure data-spot="manjanggul">
+                    <span class="thumb lb-trigger"
+                          data-src="media/manjanggul.jpg"
+                          data-alt="만장굴 내부 — 용암 동굴 특유의 암석 천장과 통로"
+                          data-caption="만장굴 — 세계 최장급 용암 동굴의 웅장한 내부">
+                        <img src="media/manjanggul.jpg"
+                             alt="만장굴 내부 — 용암 동굴 특유의 암석 천장과 통로">
+                    </span>
+                    <figcaption>
+                        <h3>만장굴</h3>
+                        <p>총 길이 약 7.4km의 세계 최장급 용암 동굴입니다.
+                           내부에는 용암 기둥·선반·종유석 형태의 지형이 그대로 보존돼 있습니다.</p>
+                        <span class="tag">세계자연유산</span>
+                        <button class="wish-btn" data-id="manjanggul" aria-pressed="false">가고 싶어요</button>
+                    </figcaption>
+                </figure>
+
+                <!-- 5. 천지연폭포 -->
+                <figure data-spot="cheonjiyeon">
+                    <span class="thumb lb-trigger"
+                          data-src="media/cheonjiyeon.jpg"
+                          data-alt="절벽 사이로 쏟아지는 천지연폭포의 웅장한 수직 낙하"
+                          data-caption="천지연폭포 — 높이 22m, 너비 12m의 웅장한 제주 대표 폭포">
+                        <img src="media/cheonjiyeon.jpg"
+                             alt="절벽 사이로 쏟아지는 천지연폭포의 웅장한 수직 낙하">
+                    </span>
+                    <figcaption>
+                        <h3>천지연폭포</h3>
+                        <p>서귀포에 위치한 높이 22m의 폭포입니다. 아열대 식물이 우거진
+                           계곡 탐방로를 따라 걸으면 폭포 소리가 점점 가까워집니다.</p>
+                        <span class="tag">천연기념물</span>
+                        <button class="wish-btn" data-id="cheonjiyeon" aria-pressed="false">가고 싶어요</button>
+                    </figcaption>
+                </figure>
+
+                <!-- 6. 대포주상절리 -->
+                <figure data-spot="jusangjeolli">
+                    <span class="thumb lb-trigger"
+                          data-src="media/jusangjeolli.jpg"
+                          data-alt="바다를 향해 수직으로 깎아내린 대포 주상절리 현무암 기둥들"
+                          data-caption="대포 주상절리 — 파도가 깎아낸 현무암 기둥의 절경">
+                        <img src="media/jusangjeolli.jpg"
+                             alt="바다를 향해 수직으로 깎아내린 대포 주상절리 현무암 기둥들">
+                    </span>
+                    <figcaption>
+                        <h3>대포 주상절리</h3>
+                        <p>용암이 식으며 생성된 육각형 현무암 기둥이 해안을 따라 늘어서
+                           있습니다. 파도가 기둥에 부딪히는 장관이 장관입니다.</p>
+                        <span class="tag">지질 명소</span>
+                        <button class="wish-btn" data-id="jusangjeolli" aria-pressed="false">가고 싶어요</button>
+                    </figcaption>
+                </figure>
+
+            </div>
+        </section>
+
+        <!-- 먹거리: 본문 article + 팁 aside 2단 배치 (Grid) -->
+        <section class="section food-section" id="food">
+            <div class="section-head">
+                <span class="label">FOOD</span>
+                <h2>제주의 맛</h2>
+                <p>제주 흑돼지와 고기국수, 제철 해산물까지. 섬에서만 맛볼 수 있는 음식을 소개합니다.</p>
+            </div>
+
+            <div class="food-layout">
+                <!-- 본문 영역 -->
+                <article class="food-article">
+                    <img src="media/gogi_guksu.jpg"
+                         alt="제주 고기국수 — 뚝배기에 담긴 돼지고기 수육과 국수">
+                    <div class="body">
+                        <h3>고기국수</h3>
+                        <p>제주 고기국수는 돼지뼈와 고기로 우려낸 진한 국물에 소면을 넣어
+                           먹는 제주 고유의 향토 음식입니다. 국수 위에 수육을 듬뿍 올려 내는
+                           것이 특징이며, 뽀얀 국물이 따뜻하고 구수합니다.</p>
+                        <p>제주 시내 칠성로 주변과 동문시장 근처에 오랜 역사를 가진
+                           식당이 많습니다. 아침 식사로도 즐기는 현지인들의 소울푸드입니다.</p>
+                    </div>
+                </article>
+
+                <!-- 팁 영역 -->
+                <aside class="food-aside">
+                    <h3>여행 팁</h3>
+                    <ul>
+                        <li><strong>이동</strong> 렌터카 이용이 가장 편리합니다.
+                            대중교통은 간선·지선버스가 주요 명소를 연결합니다.</li>
+                        <li><strong>일정</strong> 성산일출봉은 새벽 일출 시간에 맞춰
+                            방문하는 것이 좋고, 한라산 탐방은 오전 일찍 시작해야 합니다.</li>
+                        <li><strong>먹거리</strong> 고기국수 외에 흑돼지 구이, 갈치조림,
+                            옥돔구이, 오메기떡도 꼭 맛보길 권합니다.</li>
+                        <li><strong>시기</strong> 4~6월, 9~11월이 여행하기 좋습니다.
+                            여름 성수기는 숙박·식당 예약을 미리 해두는 것이 좋습니다.</li>
+                    </ul>
+                </aside>
+            </div>
+        </section>
+
+        <!-- [추가과제] 영상 섹션 — 유튜브 영상 4개를 15초마다 자동 순환.
+             이전/다음 버튼과 현재 영상 표시(N / M)로 수동 전환도 가능.
+             iframe src를 JS로 교체하는 방식. -->
+        <section class="section video-section" id="video">
+            <div class="section-head" style="margin-left:auto; margin-right:auto; text-align:center;">
+                <span class="label">VIDEO</span>
+                <h2>제주를 영상으로 만나다</h2>
+                <p>제주의 자연과 풍경을 담은 영상들을 15초마다 자동으로 순환합니다.</p>
+            </div>
+
+            <div class="video-carousel">
+                <div class="video-frame">
+                    <!-- [추가과제] 유튜브 iframe — JS가 src를 순환 교체함.
+                         enablejsapi=0 으로 단순 임베드, autoplay=1+mute=1 로 자동재생 허용. -->
+                    <iframe id="ytFrame"
+                            src=""
+                            title="제주 여행 영상"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen>
+                    </iframe>
+                </div>
+
+                <!-- 영상 제목 표시 -->
+                <p class="video-title" id="ytTitle"></p>
+
+                <!-- 순환 컨트롤: 이전/다음 버튼 + N/M 인디케이터 -->
+                <div class="video-controls">
+                    <button class="vc-btn" id="ytPrev" aria-label="이전 영상">&#8592; 이전</button>
+                    <span class="vc-indicator" id="ytIndicator">1 / 4</span>
+                    <button class="vc-btn" id="ytNext" aria-label="다음 영상">다음 &#8594;</button>
+                </div>
+
+                <!-- 자동 순환 진행 표시 바 -->
+                <div class="video-progress" aria-hidden="true">
+                    <div class="video-progress-bar" id="ytProgressBar"></div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- 푸터: 브랜드 표기 + '맨 위로' 링크 + 이미지 출처/라이선스 -->
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <div>
+                <span class="brand">juyong<span class="dot">.dev</span></span>
+                <small>&copy; 2026 제주 여행 가이드 · 신주용</small>
+            </div>
+            <!-- href="#top" 으로 최상단 이동 -->
+            <a href="#top" class="to-top">&#8593; 맨 위로</a>
+        </div>
+
+        <div class="credits">
+            <p>이미지 출처 (Wikimedia Commons):
+                <a href="https://commons.wikimedia.org/wiki/File:Jeju_Island_20141128_09_(15710276888).jpg" target="_blank" rel="noopener">협재해변 전경 — 히어로 (CC BY-SA 2.0)</a>,
+                <a href="https://commons.wikimedia.org/wiki/File:Jeju_SunrisePeak.JPG" target="_blank" rel="noopener">성산일출봉 (CC BY-SA 3.0)</a>,
+                <a href="https://commons.wikimedia.org/wiki/File:Wooden_staircase_along_Yeongsil_Trail_with_the_mountains_of_Hallasan_Park_Jeju_Island_South_Korea.jpg" target="_blank" rel="noopener">한라산 영실 탐방로 (CC BY-SA 4.0)</a>,
+                <a href="https://commons.wikimedia.org/wiki/File:Hyeopjae_Beach_Scenery.jpg" target="_blank" rel="noopener">협재해변 (CC BY-SA 4.0)</a>,
+                <a href="https://commons.wikimedia.org/wiki/File:Manjanggul_caves_32.jpg" target="_blank" rel="noopener">만장굴 (CC BY-SA 4.0)</a>,
+                <a href="https://commons.wikimedia.org/wiki/File:Cheonjiyeon_Waterfall_20160616_092608.jpg" target="_blank" rel="noopener">천지연폭포 (CC BY-SA 3.0)</a>,
+                <a href="https://commons.wikimedia.org/wiki/File:Daepo_Jusangjeolli_Cliff_02.jpg" target="_blank" rel="noopener">대포 주상절리 (CC0)</a>,
+                <a href="https://commons.wikimedia.org/wiki/File:Gogi-guksu.jpg" target="_blank" rel="noopener">고기국수 (CC0)</a>.
+                영상: YouTube (각 영상 저작권은 해당 채널에 귀속).
+            </p>
+        </div>
+    </footer>
+
+    <script src="script/main.js"></script>
+</body>
+</html>

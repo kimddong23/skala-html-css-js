@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>나의 여행 소개</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+    <h1><i class="bi bi-suitcase-lg-fill"></i> 나의 여행 앨범</h1>
+    <p>인생 최고의 여행지... 그곳은 바로 <strong>해군 기초군사훈련단</strong>이었습니다. 2년짜리 국내 무료 패키지, 후기 별점 ★☆☆☆☆.</p>
+
+    <!-- 여행 메인 사진. figure로 사진+설명 묶음 -->
+    <figure class="trip-hero">
+        <img src="media/navy_gate.jpg" alt="대한민국 해군교육사령부 정문">
+        <figcaption>여행의 시작점, 대한민국 해군교육사령부(Naval Education &amp; Training Command).<br>이 문을 통과하는 순간, git으로 치면 되돌릴 수 없는 커밋을 한 셈이었다.</figcaption>
+    </figure>
+    <hr>
+
+    <!-- 여행 BGM: 해군가. audio 태그 controls로 재생/정지 버튼이 생김 -->
+    <h2><i class="bi bi-music-note-beamed"></i> 여행 BGM — 해군가</h2>
+    <audio controls src="media/navy_song.mp3">
+        브라우저가 audio 태그를 지원하지 않습니다.
+    </audio>
+    <hr>
+
+    <!-- 사진 3장을 나란히 배치. 스타일과 hover 효과는 css에서 처리 -->
+    <h2><i class="bi bi-camera-fill"></i> 여행 사진</h2>
+    <div class="trip-grid-container">
+        <p class="trip-card">
+            <img src="media/navy_swim.jpg" alt="해군 기초군사훈련단 수상훈련"><br>수상훈련 — 물에 빠지기 직전까진 다들 개발자였다
+        </p>
+        <p class="trip-card">
+            <img src="media/navy_mp_barracks.jpg" alt="해군 군기헌병 영창 근무"><br>영창 근무 — 규정 어긴 사람은 린터 무시한 코드 취급
+        </p>
+        <p class="trip-card">
+            <img src="media/navy_mp_dress.jpg" alt="해군 군기헌병 정복 근무 (예시 사진)"><br>군기헌병 정복 (예시 사진) — 세미콜론 대신 각을 잡던 시절
+        </p>
+    </div>
+    <hr>
+
+    <h2><i class="bi bi-film"></i> 여행 영상 — 바다로 가는 첫걸음</h2>
+    <p>대한민국 해군 공식 영상. 난이도) 개발자 취업 &gt;&gt;&gt; 군함 높이에서 물로 뛰어내리기</p>
+    <!-- [추가과제] 유튜브 지연 로딩: 처음엔 썸네일 사진만 보여주고,
+         재생 버튼을 누르면 그때 iframe을 만들어 넣음 (videoFacade.js).
+         초기 로딩 비용을 줄이는 facade 패턴 -->
+    <div class="video-facade" id="videoFacade" data-video="nKi2bniOEAg">
+        <img src="https://img.youtube.com/vi/nKi2bniOEAg/hqdefault.jpg" alt="해군 훈련소의 모든 것 - 바다로 가는 첫걸음">
+        <span class="play-btn"><i class="bi bi-play-fill"></i></span>
+    </div>
+    </div>
+
+    <!-- [추가과제] 영상 썸네일 클릭하면 실제 유튜브 재생 -->
+    <script src="script/videoFacade.js"></script>
+</body>
+</html>

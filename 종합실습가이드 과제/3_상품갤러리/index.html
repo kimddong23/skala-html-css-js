@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="juyong.dev 개발자 상품 갤러리">
+    <meta name="author" content="신주용">
+    <title>juyong.dev | 상품 갤러리</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- 상단바: Flexbox 로 로고(왼쪽) / 메뉴 / 우측 컨트롤 배치 -->
+    <header class="site-header">
+        <a href="index.html" class="logo">juyong<span class="dot">.dev</span> Store</a>
+
+        <!-- [보완] 카테고리 필터 메뉴: data-filter 속성으로 JS 이벤트 위임 처리.
+             600px 이하에서 CSS 로 숨김. 활성 항목은 .active 클래스로 구분. -->
+        <nav class="nav-menu" id="nav-menu">
+            <a href="#gallery" class="nav-link active" data-filter="전체">전체 상품</a>
+            <a href="#gallery" class="nav-link" data-filter="키보드">키보드</a>
+            <a href="#gallery" class="nav-link" data-filter="모니터">모니터</a>
+            <a href="#gallery" class="nav-link" data-filter="기술서적">기술서적</a>
+        </nav>
+
+        <!-- 우측 컨트롤 묶음: 찜 카운터 / 장바구니 카운터 / 다크모드 버튼 -->
+        <div class="header-controls">
+            <!-- [추가과제] 찜 카운터 뱃지 -->
+            <button id="wish-counter" class="counter-btn" type="button" aria-label="찜한 상품">
+                찜 <span id="wish-count">0</span>
+            </button>
+            <!-- [보완] 장바구니 카운터 뱃지 -->
+            <button id="cart-counter" class="counter-btn" type="button" aria-label="장바구니">
+                장바구니 <span id="cart-count">0</span>
+            </button>
+            <!-- 다크모드 토글 -->
+            <button id="theme-toggle" class="theme-toggle" type="button" aria-label="테마 전환">
+                <span class="theme-toggle-text">다크모드</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- 히어로: @keyframes 로 순차 등장 애니메이션 -->
+    <section class="hero">
+        <p class="hero-eyebrow">DEVELOPER GOODS</p>
+        <h1 class="hero-title">개발하는 하루를 위한 물건들</h1>
+        <p class="hero-desc">키보드부터 기술서적까지, 담백하게 골라 담은 개발자 상품 모음.</p>
+    </section>
+
+    <!-- 상품 카드 갤러리 -->
+    <main class="container">
+
+        <!-- [추가과제] 가격 정렬 셀렉트: 선택 시 카드 DOM 순서를 가격 기준으로 재정렬 -->
+        <div class="gallery-controls">
+            <label for="sort-select" class="sort-label">정렬</label>
+            <select id="sort-select" class="sort-select">
+                <option value="default">기본</option>
+                <option value="asc">낮은 가격순</option>
+                <option value="desc">높은 가격순</option>
+            </select>
+        </div>
+
+        <!-- display:grid 로 3열 배치 -->
+        <section id="gallery" class="gallery" aria-label="상품 목록">
+
+            <!-- 카드 1: data-category 로 필터 대상 지정 -->
+            <article class="card" data-id="1" data-category="키보드">
+                <!-- 실제 상품 이미지: object-fit:cover + aspect-ratio 로 비율 유지 -->
+                <img class="card-image" src="media/keyboard.jpg" alt="기계식 키보드 K1">
+                <!-- [추가과제] 찜 버튼: &#9825;/&#9829; 토글, font-variant-emoji:text 로 텍스트 렌더 강제 -->
+                <button class="wish-btn" type="button" data-id="1" aria-label="찜하기">&#9825;</button>
+                <div class="card-body">
+                    <div class="card-head">
+                        <span class="card-tag">키보드</span>
+                        <span class="card-price">139,000원</span>
+                    </div>
+                    <h2 class="card-title">기계식 키보드 K1</h2>
+                    <p class="card-desc">저소음 갈축, 무선·유선 겸용. 장시간 타이핑에 맞춘 각도.</p>
+                    <!-- [보완] 장바구니 버튼: 클릭 시 카운터 증가, localStorage 저장 -->
+                    <button class="card-btn" type="button" data-id="1">장바구니 담기</button>
+                </div>
+            </article>
+
+            <!-- 카드 2 -->
+            <article class="card" data-id="2" data-category="주변기기">
+                <img class="card-image" src="media/monitorarm.jpg" alt="듀얼 모니터암">
+                <button class="wish-btn" type="button" data-id="2" aria-label="찜하기">&#9825;</button>
+                <div class="card-body">
+                    <div class="card-head">
+                        <span class="card-tag">주변기기</span>
+                        <span class="card-price">89,000원</span>
+                    </div>
+                    <h2 class="card-title">듀얼 모니터암</h2>
+                    <p class="card-desc">가스 스프링 방식으로 높이·각도 자유롭게. 책상 위를 넓게 씀.</p>
+                    <button class="card-btn" type="button" data-id="2">장바구니 담기</button>
+                </div>
+            </article>
+
+            <!-- 카드 3 -->
+            <article class="card" data-id="3" data-category="기술서적">
+                <img class="card-image" src="media/book.jpg" alt="클린 아키텍처 기술서적">
+                <button class="wish-btn" type="button" data-id="3" aria-label="찜하기">&#9825;</button>
+                <div class="card-body">
+                    <div class="card-head">
+                        <span class="card-tag">기술서적</span>
+                        <span class="card-price">32,000원</span>
+                    </div>
+                    <h2 class="card-title">클린 아키텍처</h2>
+                    <p class="card-desc">유지보수 가능한 구조를 고민하는 개발자를 위한 스테디셀러.</p>
+                    <button class="card-btn" type="button" data-id="3">장바구니 담기</button>
+                </div>
+            </article>
+
+            <!-- 카드 4 -->
+            <article class="card" data-id="4" data-category="모니터">
+                <img class="card-image" src="media/monitor.jpg" alt="27인치 4K 모니터">
+                <button class="wish-btn" type="button" data-id="4" aria-label="찜하기">&#9825;</button>
+                <div class="card-body">
+                    <div class="card-head">
+                        <span class="card-tag">모니터</span>
+                        <span class="card-price">459,000원</span>
+                    </div>
+                    <h2 class="card-title">27인치 4K 모니터</h2>
+                    <p class="card-desc">코드가 선명하게 보이는 고밀도 패널. USB-C 원케이블 연결.</p>
+                    <button class="card-btn" type="button" data-id="4">장바구니 담기</button>
+                </div>
+            </article>
+
+            <!-- 카드 5 -->
+            <article class="card" data-id="5" data-category="굿즈">
+                <img class="card-image" src="media/mug.jpg" alt="터미널 머그컵">
+                <button class="wish-btn" type="button" data-id="5" aria-label="찜하기">&#9825;</button>
+                <div class="card-body">
+                    <div class="card-head">
+                        <span class="card-tag">굿즈</span>
+                        <span class="card-price">18,000원</span>
+                    </div>
+                    <h2 class="card-title">터미널 머그컵</h2>
+                    <p class="card-desc">깊은 커피 한 잔 담기는 용량. 커맨드 프롬프트 각인.</p>
+                    <button class="card-btn" type="button" data-id="5">장바구니 담기</button>
+                </div>
+            </article>
+
+            <!-- 카드 6 -->
+            <article class="card" data-id="6" data-category="주변기기">
+                <img class="card-image" src="media/mouse.jpg" alt="무소음 버티컬 마우스">
+                <button class="wish-btn" type="button" data-id="6" aria-label="찜하기">&#9825;</button>
+                <div class="card-body">
+                    <div class="card-head">
+                        <span class="card-tag">주변기기</span>
+                        <span class="card-price">64,000원</span>
+                    </div>
+                    <h2 class="card-title">무소음 버티컬 마우스</h2>
+                    <p class="card-desc">손목 부담을 줄이는 세로형 그립. 작업 흐름을 끊지 않는 조용함.</p>
+                    <button class="card-btn" type="button" data-id="6">장바구니 담기</button>
+                </div>
+            </article>
+
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <p>&copy; 2026 juyong<span class="dot">.dev</span> Store &middot; 개발자를 위한 상품 갤러리</p>
+    </footer>
+
+    <script src="script/main.js"></script>
+</body>
+</html>

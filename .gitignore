@@ -1,0 +1,8 @@
+# 운영/시스템 파일 (GitHub에 올리지 않음)
+.omc/
+.DS_Store
+**/.DS_Store
+
+# 에디터/OS 잡파일
+.vscode/
+Thumbs.db

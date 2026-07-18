@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>신주용의 개인 포털</title>
+    <!-- 부트스트랩 아이콘 폰트 불러오기 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- 내용 전체를 하나로 묶어서 화면 가운데로 모으는 상자 -->
+    <div class="container">
+        <header>
+            <h1>신주용의 개발 유니버스 <i class="bi bi-rocket-takeoff-fill"></i></h1>
+            <p>커밋 메시지가 <code>fix</code> → <code>fix2</code> → <code>fix_진짜최종</code> 으로 이어지는 신주용의 개발 포털.</p>
+            <!-- 'Build passing' 배지 영역 -->
+            <p class="dev-status">
+                <span class="badge-pass"><i class="bi bi-check-circle-fill"></i> Build: passing</span>
+                <span class="badge-note">(제 컴퓨터에선 됩니다 🤷)</span>
+            </p>
+        </header>
+
+        <!-- 다른 페이지로 가는 메뉴. nav 태그로 묶음 -->
+        <nav>
+            <h3><i class="bi bi-folder2-open"></i> 바로가기 메뉴</h3>
+            <ul>
+                <li><a href="myProfile.html"><i class="bi bi-person"></i> 소개 (Profile)</a></li>
+                <li><a href="myClass.html"><i class="bi bi-calendar-week"></i> 수업 시간표 (Class)</a></li>
+                <li><a href="myHoliday.html"><i class="bi bi-cup-hot"></i> 휴일 계획 (Holiday)</a></li>
+                <li><a href="myTrip.html"><i class="bi bi-images"></i> 여행 앨범 (Album)</a></li>
+                <li><a href="signUp.html"><i class="bi bi-person-plus"></i> 회원가입 (Sign Up)</a></li>
+            </ul>
+        </nav>
+
+        <hr>
+
+        <!-- 본문(main)과 옆칸(aside)을 좌우 두 칸으로 나눔. 실제 배치는 css에서 처리 -->
+        <div class="content-wrapper">
+            <main>
+                <h2><i class="bi bi-pin-angle-fill"></i> 오늘의 주요 소식</h2>
+
+                <section>
+                    <h3>개발자 생존 로그</h3>
+                    <!-- 소식 피드처럼 항목을 article로 하나씩 쌓음 -->
+                    <article>
+                        <h4>[속보 🔥] Kaggle 메달, 10등 차이로 증발</h4>
+                        <p>밤새 대회를 붙잡고 드디어 메달권 진입 성공. 그런데 어떤 정신 나간 외국인이 자기 솔루션을 <strong>비트코인 받고 팔았고</strong>, 그걸 사서 낸 사람들이 우수수 위로 올라오는 바람에 나는 딱 10등 차이로 메달 밖으로 밀렸다. 근데 아직 그 빌런이 안 잡혀서 대회 결과 확정도 안 난 상태. 순위표를 새로고침하며 판정을 기다리는 중이다. 눈에 눈물이 고였다.</p>
+                        <p>작성일: <time datetime="2026-07-13">2026년 7월 13일 (월)</time> · 실화</p>
+                    </article>
+                    <article>
+                        <h4>[버그 리포트 🐛] "HTML이 제 메인 언어예요"</h4>
+                        <p>농담인 줄 알았는데 진심이었던 옛날 팀원. HTML이 언제부터, 어떻게 프로그래밍 '언어'가 되었는가... 나는 아직도 답을 찾지 못했다.</p>
+                    </article>
+                    <article>
+                        <h4>[재현 불가 🔌] 친구가 공유한 사이트가 안 열림</h4>
+                        <p>바이브코딩 역작이라며 링크를 보내줬다. <code>http://localhost:3000</code>. "왜 안 보여?"라고 따지는 친구에게 서버와 클라이언트가 뭔지 설명하는 데 30분이 걸렸다.</p>
+                    </article>
+                    <article>
+                        <h4>[시장 동향 📉] 부트캠프 수료 = 레드오션 입장권</h4>
+                        <p>수료증을 받은 순간 깨달았다. 나와 똑같은 수료증을 든 사람이 전국에 수만 명. 눈물이 앞을 가렸지만 커밋은 멈추지 않았다.</p>
+                    </article>
+                </section>
+
+                <section>
+                    <h3><i class="bi bi-camera-fill"></i> 이달의 베스트 컷</h3>
+                    <!-- 사진과 설명은 figure로 함께 묶음 -->
+                    <figure>
+                        <img src="media/navy_gate.jpg" alt="대한민국 해군교육사령부 정문">
+                        <figcaption>대한민국 최고의 여름 피서지,<br>해군 기초군사훈련단에서 23개월 여행 다녀온 사진이다.</figcaption>
+                    </figure>
+                </section>
+            </main>
+
+            <!-- 옆에 붙는 칸. 날씨와 게임 버튼을 모아둠 -->
+            <aside>
+                <!-- [추가과제] 오늘의 개발자 운세 - 페이지 로드/버튼 클릭마다 랜덤 운세 표시 -->
+                <section class="fortune-card">
+                    <h3><i class="bi bi-stars"></i> 오늘의 개발자 운세</h3>
+                    <p id="fortune-text">운세를 뽑는 중...</p>
+                    <button class="btn-submit" id="fortune-btn"><i class="bi bi-arrow-clockwise"></i> 다시 뽑기</button>
+                </section>
+
+                <h2><i class="bi bi-cloud-sun-fill"></i> 실시간 정보</h2>
+                <p>현재 위치: SKALA 광주 캠퍼스 <i class="bi bi-geo-alt-fill"></i></p>
+
+                <section>
+                    <h3><i class="bi bi-cloud-sun"></i> 실시간 세계 날씨</h3>
+                    <!-- 도시를 고르면 change 이벤트로 그 도시 날씨 표시 (기능은 realtimeInfo.js) -->
+                    <select id="city-select">
+                        <option value="none">도시를 선택하세요</option>
+                        <option value="37.56,126.97">대한민국 서울</option>
+                        <option value="35.67,139.65">일본 도쿄</option>
+                        <option value="48.85,2.35">프랑스 파리</option>
+                        <option value="40.71,-74.01">미국 뉴욕</option>
+                    </select>
+                    <!-- [추가과제] 자동 순환 토글 - 켜면 15초마다 다음 도시로 자동 전환 -->
+                    <button class="btn-submit" id="auto-toggle"><i class="bi bi-play-circle"></i> 자동 순환 켜기</button>
+                    <div id="weather-box">
+                        <p>도시를 선택하면 실시간 날씨가 표시됩니다.</p>
+                    </div>
+                </section>
+
+                <hr>
+
+                <!-- 자바스크립트 기능들. 버튼을 누르면 실행됨 -->
+                <section class="game-area">
+                    <h3><i class="bi bi-controller"></i> 자바스크립트 놀이터</h3>
+                    <p class="game-sub">런타임 에러 없이 놀 수 있는 유일한 구역</p>
+                    <button class="btn-submit" onclick="startGame()"><i class="bi bi-rocket-takeoff"></i> 업다운 게임</button>
+                    <button class="btn-submit" onclick="checkGrade()"><i class="bi bi-bar-chart-line"></i> 성적 계산기</button>
+                    <button class="btn-submit" onclick="showMyBag()"><i class="bi bi-backpack2"></i> 내 가방 보기</button>
+                </section>
+            </aside>
+        </div>
+
+        <hr>
+
+        <footer>
+            <p><i class="bi bi-github"></i> GitHub:
+                <a href="https://github.com/kimddong23" target="_blank">github.com/kimddong23</a>
+            </p>
+            <p><small>&copy; 2026 신주용 · SKALA 4기 포트폴리오.</small></p>
+        </footer>
+    </div>
+
+    <!-- 게임 / 계산기 / 가방 스크립트 불러오기 -->
+    <script src="script/upDown.js"></script>
+    <script src="script/grade.js"></script>
+    <script src="script/bag.js"></script>
+    <!-- [추가과제] 오늘의 개발자 운세 (페이지 로드/버튼마다 랜덤) -->
+    <script src="script/fortune.js"></script>
+    <!-- 이 파일은 module import를 쓰므로 Live Server 같은 서버 환경에서 열어야 날씨가 동작함 -->
+    <script type="module" src="script/realtimeInfo.js"></script>
+</body>
+</html>

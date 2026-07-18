@@ -1,0 +1,177 @@
+/* =====================================================
+   종합실습 ① 회원가입 & 결과 페이지 - juyong.dev
+   컨셉: 개발자 신주용의 커뮤니티. 미니멀/모던 톤 (교안 과제랑 같은 색감으로 통일).
+   ===================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap');
+
+/* 색/모양 값들을 변수로 모아둠. 한 곳에서 관리하니 편함. */
+:root {
+    --ink: #18181b;          /* 본문 글자색 */
+    --muted: #71717a;        /* 덜 중요한 글자 */
+    --line: #e4e4e7;         /* 선/테두리 */
+    --bg: #ffffff;
+    --surface: #fafafa;      /* 카드/입력 영역 배경 */
+    --accent: #4f46e5;       /* 포인트색 (indigo) */
+    --accent-weak: #eef2ff;  /* 포인트색 연한 버전 */
+    --radius: 12px;
+}
+
+* { box-sizing: border-box; }   /* padding 넣어도 박스 안 삐져나가게 */
+
+body {
+    font-family: 'Noto Sans KR', system-ui, sans-serif;
+    line-height: 1.7;
+    color: var(--ink);
+    background: var(--bg);
+    margin: 0;
+    /* 헤더가 position:fixed 라 화면 위를 덮음. 그만큼 위쪽 여백을 줘서 안 가리게 함. */
+    padding-top: 64px;
+    letter-spacing: -0.01em;
+}
+
+/* ===== 고정 헤더 (position:fixed + z-index) =====
+   스크롤 내려도 항상 화면 맨 위에 붙어있음. z-index는 다른 요소 위로 올려주는 값. */
+.site-header {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%;
+    height: 64px;
+    z-index: 100;                       /* 숫자 클수록 위에 뜸. 헤더가 내용 위로 오게 */
+    background: var(--bg);
+    border-bottom: 1px solid var(--line);
+    display: flex;                      /* 로고랑 메뉴를 가로로 */
+    align-items: center;
+    justify-content: space-between;     /* 로고는 왼쪽, 메뉴는 오른쪽 */
+    padding: 0 24px;
+}
+.site-header .logo {
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--ink);
+    text-decoration: none;
+}
+.site-header .logo .dot { color: var(--accent); }   /* juyong '.dev' 의 점만 강조 */
+.site-header nav a {
+    color: var(--muted);
+    text-decoration: none;
+    margin-left: 18px;
+    font-size: 0.95rem;
+}
+.site-header nav a:hover { color: var(--accent); }
+
+/* 본문 감싸는 상자 - 가운데 정렬 + 최대폭 */
+.container {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+h1 { font-size: 1.7rem; font-weight: 700; margin: 0 0 6px; }
+h2 { font-size: 1.2rem; font-weight: 700; margin: 28px 0 12px; }
+.subtitle { color: var(--muted); margin: 0 0 24px; }
+
+/* ===== 폼 영역 ===== */
+fieldset {
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 20px 22px;
+    margin-bottom: 18px;
+}
+legend { font-weight: 700; padding: 0 8px; }
+.field { margin-bottom: 16px; }
+.field:last-child { margin-bottom: 0; }
+label { display: block; font-size: 0.9rem; font-weight: 500; margin-bottom: 6px; }
+.hint { color: var(--muted); font-size: 0.8rem; font-weight: 400; }
+
+/* 입력칸들 한 번에 꾸미기 (type이 text, password... 인 것들 골라서 똑같이) */
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="tel"],
+input[type="date"],
+select,
+textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 0.95rem;
+    background: var(--bg);
+    color: var(--ink);
+    transition: border-color .15s ease, box-shadow .15s ease;
+}
+/* 입력칸 클릭했을 때(:focus) 포인트색 테두리 - 지금 어디 입력 중인지 보이게 */
+input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-weak);
+}
+textarea { resize: vertical; min-height: 100px; }
+
+/* 라디오/체크박스는 width:100% 빼고 가로로 나열 */
+.choice-group { display: flex; flex-wrap: wrap; gap: 14px; }
+.choice {
+    display: flex; align-items: center; gap: 6px;
+    font-size: 0.92rem; font-weight: 400; margin: 0;
+    cursor: pointer;
+}
+.choice input { width: auto; accent-color: var(--accent); cursor: pointer; }
+
+/* ===== 버튼 =====
+   .btn 이 공통 모양이고, .btn-primary 를 같이 붙이면 색이 덧씌워짐.
+   (수업에서 배운 '특이도' - class 여러 개로 세부 스타일 얹기) */
+.btn {
+    padding: 11px 22px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: var(--bg);
+    color: var(--ink);
+    cursor: pointer;
+    transition: all .15s ease;
+}
+.btn:hover { background: var(--surface); }
+.btn-primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+.btn-primary:hover { background: #4338ca; }   /* .btn-primary 가 .btn 위에 덧씌워짐 */
+.actions { display: flex; gap: 10px; margin-top: 22px; }
+
+/* ===== 결과 페이지 표 ===== */
+.result-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 8px;
+    font-size: 0.95rem;
+}
+.result-table th, .result-table td {
+    border: 1px solid var(--line);
+    padding: 12px 14px;
+    text-align: left;
+}
+.result-table th {
+    background: var(--surface);
+    width: 32%;
+    font-weight: 600;
+    white-space: nowrap;
+}
+.notice {
+    background: var(--accent-weak);
+    border: 1px solid #dfe3ff;
+    border-radius: var(--radius);
+    padding: 16px 18px;
+    margin-top: 24px;
+    color: var(--ink);
+}
+
+footer {
+    max-width: 640px;
+    margin: 40px auto 0;
+    padding: 20px;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 0.85rem;
+    text-align: center;
+}
+

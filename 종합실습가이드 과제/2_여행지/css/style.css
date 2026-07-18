@@ -1,0 +1,501 @@
+/* =====================================================
+   종합실습 ② 여행지 소개 페이지 — 제주 — juyong.dev
+   브랜드 기준: Noto Sans KR, indigo #4f46e5, 미니멀/모던
+   ===================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap');
+
+/* 색/모양 값을 변수로 관리 */
+:root {
+    --ink: #18181b;
+    --muted: #71717a;
+    --line: #e4e4e7;
+    --bg: #ffffff;
+    --surface: #fafafa;
+    --accent: #4f46e5;
+    --accent-weak: #eef2ff;
+    --radius: 12px;
+    --shadow: 0 6px 24px rgba(24, 24, 27, 0.08);
+}
+
+* { box-sizing: border-box; }
+
+/* 앵커 클릭 시 부드럽게 스크롤.
+   scroll-padding-top: 고정 nav 높이(60px)만큼 여백을 확보해 섹션이 nav 아래에 안착하게 함. */
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 68px;
+}
+
+body {
+    font-family: 'Noto Sans KR', system-ui, sans-serif;
+    line-height: 1.7;
+    color: var(--ink);
+    background: var(--bg);
+    margin: 0;
+    letter-spacing: -0.01em;
+}
+
+/* ===== 상단 고정 헤더 + 내비게이션 (position:fixed) =====
+   z-index 100으로 스크롤 시에도 항상 화면 맨 위에 표시. */
+.site-header {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%;
+    height: 60px;
+    z-index: 100;
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 24px;
+}
+.site-header .logo {
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--ink);
+    text-decoration: none;
+    flex-shrink: 0;
+}
+.site-header .logo .dot { color: var(--accent); }
+
+/* nav 링크: 각 섹션 id로 연결되는 앵커 */
+.site-nav { display: flex; gap: 20px; }
+.site-nav a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.92rem;
+    font-weight: 500;
+    padding: 4px 2px;
+    border-bottom: 2px solid transparent;
+    transition: color .15s ease, border-color .15s ease;
+}
+.site-nav a:hover {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+}
+
+/* [보완] 현재 섹션 내비 하이라이트 강화.
+   JS가 IntersectionObserver로 감지해 .is-active 클래스를 추가/제거.
+   CSS 클래스 방식으로 처리해 transition 효과까지 자연스럽게 적용. */
+.site-nav a.is-active {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+    font-weight: 700;
+}
+
+@media (max-width: 560px) {
+    .site-nav a.optional { display: none; }
+}
+
+/* ===== 히어로 =====
+   background에 gradient 오버레이 + 협재해변 이미지를 겹쳐
+   어두운 막이 흰 텍스트 가독성을 확보함. */
+.hero {
+    min-height: 78vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 100px 24px 72px;
+    text-align: center;
+    color: #ffffff;
+    background:
+        linear-gradient(180deg, rgba(24, 24, 27, 0.50) 0%, rgba(79, 70, 229, 0.52) 100%),
+        url('../media/hero.jpg') center / cover no-repeat;
+}
+.hero .eyebrow {
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    font-size: 0.8rem;
+    font-weight: 500;
+    opacity: 0.9;
+    margin: 0 0 14px;
+}
+.hero h1 {
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 700;
+    margin: 0 0 16px;
+    text-shadow: 0 2px 16px rgba(0, 0, 0, 0.3);
+}
+.hero p {
+    max-width: 560px;
+    margin: 0 auto 28px;
+    font-size: 1.05rem;
+    opacity: 0.95;
+}
+.hero .cta {
+    display: inline-block;
+    padding: 12px 26px;
+    background: var(--bg);
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 600;
+    border-radius: 8px;
+    transition: transform .15s ease, box-shadow .15s ease;
+}
+.hero .cta:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow);
+}
+
+/* ===== 공통 레이아웃 ===== */
+main { display: block; }
+
+.section {
+    max-width: 1040px;
+    margin: 0 auto;
+    padding: 72px 24px;
+}
+.section-head { max-width: 640px; margin-bottom: 36px; }
+.section-head .label {
+    color: var(--accent);
+    font-weight: 600;
+    font-size: 0.85rem;
+    letter-spacing: 0.04em;
+}
+.section h2 {
+    font-size: 1.7rem;
+    font-weight: 700;
+    margin: 6px 0 10px;
+}
+.section-head p { color: var(--muted); margin: 0; }
+
+/* ===== [추가과제] 가보고 싶은 명소 카운트 표시 바 ===== */
+.wishlist-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 24px;
+    padding: 10px 16px;
+    background: var(--accent-weak);
+    border: 1px solid #dfe3ff;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    color: var(--ink);
+}
+.wishlist-bar strong { color: var(--accent); font-size: 1.1rem; }
+
+/* ===== 명소 갤러리 (figure + figcaption 3개 이상) ===== */
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 24px;
+}
+.gallery figure {
+    margin: 0;
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: transform .2s ease, box-shadow .2s ease;
+}
+.gallery figure:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 14px 32px rgba(24, 24, 27, 0.14);
+}
+
+/* [추가과제] 라이트박스 트리거: 이미지 영역 커서를 zoom-in으로 표시 */
+.thumb.lb-trigger { cursor: zoom-in; }
+
+.gallery .thumb {
+    display: block;
+    overflow: hidden;
+    aspect-ratio: 4 / 3;
+}
+.gallery img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform .35s ease;
+    pointer-events: none; /* 클릭은 .thumb.lb-trigger 에서만 받음 */
+}
+/* 카드 hover 시 이미지 scale 확대 */
+.gallery figure:hover img { transform: scale(1.08); }
+
+.gallery figcaption { padding: 18px 20px; }
+.gallery figcaption h3 { margin: 0 0 6px; font-size: 1.1rem; font-weight: 700; }
+.gallery figcaption p { margin: 0; color: var(--muted); font-size: 0.92rem; }
+.gallery figcaption .tag {
+    display: inline-block;
+    margin-top: 12px;
+    padding: 3px 10px;
+    background: var(--accent-weak);
+    color: var(--accent);
+    border-radius: 999px;
+    font-size: 0.78rem;
+    font-weight: 500;
+}
+
+/* ===== [추가과제] '가고 싶어요' 체크 버튼 ===== */
+.wish-btn {
+    display: block;
+    margin-top: 14px;
+    width: 100%;
+    padding: 8px 12px;
+    font-family: inherit;
+    font-size: 0.88rem;
+    font-weight: 500;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: var(--bg);
+    color: var(--muted);
+    cursor: pointer;
+    text-align: center;
+    transition: background .15s ease, color .15s ease, border-color .15s ease;
+}
+.wish-btn:hover {
+    background: var(--accent-weak);
+    color: var(--accent);
+    border-color: #c7d2fe;
+}
+/* aria-pressed="true" 상태: 활성(찜됨) */
+.wish-btn[aria-pressed="true"] {
+    background: var(--accent);
+    color: #ffffff;
+    border-color: var(--accent);
+}
+
+/* ===== 먹거리: 본문 article + 팁 aside 2단 배치 (Grid) ===== */
+.food-section { background: var(--surface); }
+.food-layout {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 28px;
+    align-items: start;
+}
+.food-article {
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+}
+.food-article img {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    display: block;
+}
+.food-article .body { padding: 24px 26px; }
+.food-article h3 { margin: 0 0 12px; font-size: 1.3rem; font-weight: 700; }
+.food-article p { margin: 0 0 14px; color: var(--ink); }
+.food-article p:last-child { margin-bottom: 0; }
+
+.food-aside {
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-left: 4px solid var(--accent);
+    border-radius: var(--radius);
+    padding: 22px 24px;
+}
+.food-aside h3 { margin: 0 0 14px; font-size: 1.05rem; font-weight: 700; }
+.food-aside ul { margin: 0; padding-left: 18px; }
+.food-aside li { margin-bottom: 10px; color: var(--muted); font-size: 0.92rem; }
+.food-aside li:last-child { margin-bottom: 0; }
+.food-aside li strong { color: var(--ink); font-weight: 600; }
+
+@media (max-width: 720px) {
+    .food-layout { grid-template-columns: 1fr; }
+}
+
+/* ===== [추가과제] 영상 자동 순환 캐러셀 =====
+   유튜브 iframe을 JS로 교체해 15초마다 다음 영상으로 전환.
+   이전/다음 버튼과 N/M 인디케이터로 수동 조작도 가능. */
+.video-section { text-align: center; }
+
+.video-carousel {
+    max-width: 860px;
+    margin: 0 auto;
+}
+
+/* iframe을 16:9 비율로 고정 (반응형) */
+.video-frame {
+    position: relative;
+    width: 100%;
+    padding-top: 56.25%;    /* 16:9 비율 */
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    background: #000;
+}
+.video-frame iframe {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    border: none;
+    display: block;
+}
+
+/* 현재 영상 제목 */
+.video-title {
+    color: var(--ink);
+    font-size: 0.95rem;
+    font-weight: 500;
+    margin: 16px 0 12px;
+    min-height: 1.5em;
+}
+
+/* 이전/다음 버튼 + 인디케이터 행 */
+.video-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin-bottom: 12px;
+}
+.vc-btn {
+    padding: 8px 18px;
+    font-family: inherit;
+    font-size: 0.9rem;
+    font-weight: 500;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: var(--bg);
+    color: var(--ink);
+    cursor: pointer;
+    transition: background .15s ease, border-color .15s ease;
+}
+.vc-btn:hover {
+    background: var(--accent-weak);
+    border-color: #c7d2fe;
+    color: var(--accent);
+}
+.vc-indicator {
+    font-size: 0.88rem;
+    color: var(--muted);
+    min-width: 40px;
+    text-align: center;
+}
+
+/* 자동 순환 진행 표시 바 — 15초 동안 가득 찬 뒤 리셋 */
+.video-progress {
+    height: 3px;
+    background: var(--line);
+    border-radius: 99px;
+    overflow: hidden;
+}
+.video-progress-bar {
+    height: 100%;
+    width: 0%;
+    background: var(--accent);
+    transition: width 0.25s linear;
+}
+
+/* ===== 푸터 ===== */
+.site-footer {
+    background: var(--ink);
+    color: #d4d4d8;
+    padding: 40px 24px 32px;
+}
+.footer-inner {
+    max-width: 1040px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+}
+.site-footer .brand { font-weight: 700; color: #fff; }
+.site-footer .brand .dot { color: #a5b4fc; }
+.site-footer small { display: block; color: var(--muted); margin-top: 4px; }
+
+/* '맨 위로' 링크 */
+.to-top {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 18px;
+    border: 1px solid #3f3f46;
+    border-radius: 8px;
+    color: #e4e4e7;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: background .15s ease, border-color .15s ease;
+}
+.to-top:hover { background: #27272a; border-color: var(--accent); }
+
+.credits {
+    max-width: 1040px;
+    margin: 28px auto 0;
+    padding-top: 20px;
+    border-top: 1px solid #3f3f46;
+    font-size: 0.78rem;
+    color: var(--muted);
+}
+.credits a { color: #a5b4fc; text-decoration: none; }
+.credits a:hover { text-decoration: underline; }
+
+/* ===== [추가과제] 라이트박스 오버레이 =====
+   .lightbox 자체가 반투명 배경 겸 클릭 닫기 영역.
+   JS에서 .lightbox-figure 클릭은 stopPropagation으로 막아
+   이미지 내부 클릭이 닫힘을 유발하지 않음.
+   [hidden] 속성이 있으면 display:none, JS가 제거 시 flex로 표시. */
+.lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    background: rgba(10, 10, 15, 0.88);
+    cursor: pointer;               /* 배경 클릭 시 닫힘 표시 */
+}
+.lightbox[hidden] { display: none; }
+
+/* 이미지 컨테이너 — 클릭이 lightbox 컨테이너로 전파되지 않게 JS로 막음 */
+.lightbox-figure {
+    position: relative;
+    z-index: 1;
+    margin: 0;
+    max-width: min(860px, 96vw);
+    max-height: 92vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    cursor: default;               /* 이미지 위에서는 기본 커서 */
+}
+.lightbox-figure img {
+    max-width: 100%;
+    max-height: 80vh;
+    object-fit: contain;
+    border-radius: var(--radius);
+    display: block;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+}
+.lightbox-figure figcaption {
+    color: #e4e4e7;
+    font-size: 0.9rem;
+    text-align: center;
+    padding: 0 12px;
+}
+
+/* 닫기 버튼 — 오른쪽 상단 고정 */
+.lightbox-close {
+    position: fixed;
+    top: 20px;
+    right: 24px;
+    z-index: 201;
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 50%;
+    color: #ffffff;
+    font-size: 1.4rem;
+    line-height: 1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background .15s ease;
+    font-family: inherit;
+}
+.lightbox-close:hover { background: rgba(255, 255, 255, 0.28); }
