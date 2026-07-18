@@ -75,6 +75,71 @@
 
 ---
 
+## 실행 결과 캡처
+
+### 교안 과제
+
+**1. 나의 소개 (myProfile) — 목록 ul / ol / dl**
+![myProfile](교안%20과제/screenshots/cap_01_myProfile.png)
+
+**2. 강의 시간표 (myClass) — 표 병합 rowspan / colspan**
+![myClass](교안%20과제/screenshots/cap_02b_myClass_annotated.png)
+
+**3. 휴일 일과 (myHoliday) — 텍스트 서식 br / mark / u**
+![myHoliday](교안%20과제/screenshots/cap_03_myHoliday.png)
+
+**4. 여행지 소개 (myTrip) — 시맨틱 태그 + 미디어 (추가: 유튜브 지연 로딩)**
+![myTrip](교안%20과제/screenshots/cap_04_myTrip_annotated.png)
+
+**5. 회원가입 (signUp) — 입력 유형·유효성 (추가: 폼 고도화)**
+![signUp](교안%20과제/screenshots/cap_05_signUp_annotated.png)
+
+**6. 회원가입 결과 (signUpResult) — GET 파라미터 표시**
+![signUpResult](교안%20과제/screenshots/cap_06_signUpResult.png)
+
+**7. 메인 Hub (index) — 시맨틱 레이아웃 (추가: 개발자 운세·날씨 자동순환)**
+![index](교안%20과제/screenshots/cap_07_index_annotated.png)
+
+**8. 실시간 날씨 (JS 심화) — 선택 → fetch → 기온/습도 표시**
+![weather](교안%20과제/screenshots/cap_08_weather_result.png)
+
+**9. 반응형 (모바일 뷰) — 미디어 쿼리**
+![responsive](교안%20과제/screenshots/cap_09_responsive_mobile.png)
+
+**10. 게임 — 성적 계산기 (배열/조건문)**
+![game-grade](교안%20과제/screenshots/cap_10_game_grade.png)
+
+**11. 게임 — 내 가방 (객체 배열)**
+![game-bag](교안%20과제/screenshots/cap_11_game_bag.png)
+
+**12. 게임 — 업다운 (반복문)**
+![game-updown](교안%20과제/screenshots/cap_12_game_updown.png)
+
+### 종합실습 과제
+
+**① 회원가입 — 입력 유형/유효성/고정 헤더 (전 항목 입력 상태)**
+![jong1-signup](종합실습가이드%20과제/1_회원가입/screenshots/01_signup_filled.png)
+
+**① 회원가입 결과**
+![jong1-result](종합실습가이드%20과제/1_회원가입/screenshots/02_result_filled.png)
+
+**② 제주 여행지 — 시맨틱/앵커/명소 6 (추가: 라이트박스·체크리스트·유튜브 자동순환)**
+![jong2-jeju](종합실습가이드%20과제/2_여행지/screenshots/01_jeju_full.png)
+
+**③ 상품 갤러리 — grid 3열/반응형 (기본)**
+![jong3-gallery](종합실습가이드%20과제/3_상품갤러리/screenshots/01_gallery.png)
+
+**③ 상품 갤러리 — 다크모드**
+![jong3-dark](종합실습가이드%20과제/3_상품갤러리/screenshots/02_dark.png)
+
+**③ 상품 갤러리 — 모바일 반응형**
+![jong3-mobile](종합실습가이드%20과제/3_상품갤러리/screenshots/03_mobile.png)
+
+**④ 할 일 앱 — 모듈/이벤트 위임/localStorage (추가: 마감일·우선순위·진행률 바)**
+![jong4-todo](종합실습가이드%20과제/4_할일앱/screenshots/01_todo.png)
+
+---
+
 ## 실행 방법
 
 > 날씨·모듈(`type="module"`) 기능은 파일 더블클릭(`file://`)으로는 동작하지 않습니다. **로컬 서버로 열어주세요.**
